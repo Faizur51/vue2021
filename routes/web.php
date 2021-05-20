@@ -1,7 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Backend\CategoryController;
+use App\Http\Controllers\Backend\PostController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,4 +21,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [HomeController::class, 'index'])->name('home');
+//Route::get('/category', [CategoryController::class, 'index'])->name('category');
+//Route::get('/post', [PostController::class, 'index'])->name('post');
+Route::get('/{anypath}', [HomeController::class, 'index'])->where('path','.*');
