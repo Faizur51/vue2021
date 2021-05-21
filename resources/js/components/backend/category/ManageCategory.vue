@@ -3,6 +3,7 @@
         <div class="card">
             <div class="card-header">
                 <h3 class="card-title">Manage Category</h3>
+                <router-link to='/addCategory' class="card-title float-right btn btn-info btn-sm">Add Category</router-link>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
