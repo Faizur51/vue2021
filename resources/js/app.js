@@ -1,11 +1,17 @@
 
 require('./bootstrap');
-
+//vue
 window.Vue = require('vue').default;
 
+//vform
+import Form from 'vform'
+window.Form=Form
+
+//vue router
 import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
+//routes
 import {routes} from './routes/routes'
 
 const router =new VueRouter({

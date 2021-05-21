@@ -1912,8 +1912,26 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: "CreateCategory"
+  name: "CreateCategory",
+  data: function data() {
+    return {
+      form: new Form({
+        name: null,
+        status: null
+      })
+    };
+  },
+  methods: {
+    addCategory: function addCategory() {
+      this.form.post('/add-category').then(function (data) {
+        console.log(data);
+      });
+    }
+  }
 });
 
 /***/ }),
@@ -2023,16 +2041,23 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
-/* harmony import */ var _routes_routes__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./routes/routes */ "./resources/js/routes/routes.js");
-__webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
+/* harmony import */ var vform__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vform */ "./node_modules/vform/dist/vform.es.js");
+/* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
+/* harmony import */ var _routes_routes__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./routes/routes */ "./resources/js/routes/routes.js");
+__webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js"); //vue
 
-window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js").default;
 
-Vue.use(vue_router__WEBPACK_IMPORTED_MODULE_0__.default);
+window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js").default; //vform
 
-var router = new vue_router__WEBPACK_IMPORTED_MODULE_0__.default({
-  routes: _routes_routes__WEBPACK_IMPORTED_MODULE_1__.routes,
+
+window.Form = vform__WEBPACK_IMPORTED_MODULE_0__.default; //vue router
+
+
+Vue.use(vue_router__WEBPACK_IMPORTED_MODULE_1__.default); //routes
+
+
+var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__.default({
+  routes: _routes_routes__WEBPACK_IMPORTED_MODULE_2__.routes,
   mode: 'history'
 }); //Vue.component('home', require('./components/backend/home/HomeComponent.vue').default);
 
@@ -37502,6 +37527,26 @@ process.umask = function() { return 0; };
 
 /***/ }),
 
+/***/ "./node_modules/vform/dist/vform.es.js":
+/*!*********************************************!*\
+  !*** ./node_modules/vform/dist/vform.es.js ***!
+  \*********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__),
+/* harmony export */   "Errors": () => (/* binding */ y),
+/* harmony export */   "Form": () => (/* binding */ g)
+/* harmony export */ });
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+var e=Object.defineProperty,t=Object.prototype.hasOwnProperty,r=Object.getOwnPropertySymbols,s=Object.prototype.propertyIsEnumerable,o=(t,r,s)=>r in t?e(t,r,{enumerable:!0,configurable:!0,writable:!0,value:s}):t[r]=s,a=(e,a)=>{for(var i in a||(a={}))t.call(a,i)&&o(e,i,a[i]);if(r)for(var i of r(a))s.call(a,i)&&o(e,i,a[i]);return e};const n=e=>void 0===e,l=e=>Array.isArray(e),c=e=>e&&"number"==typeof e.size&&"string"==typeof e.type&&"function"==typeof e.slice,h=(e,t,r,s)=>((t=t||{}).indices=!n(t.indices)&&t.indices,t.nullsAsUndefineds=!n(t.nullsAsUndefineds)&&t.nullsAsUndefineds,t.booleansAsIntegers=!n(t.booleansAsIntegers)&&t.booleansAsIntegers,t.allowEmptyArrays=!n(t.allowEmptyArrays)&&t.allowEmptyArrays,r=r||new FormData,n(e)||(null===e?t.nullsAsUndefineds||r.append(s,""):(e=>"boolean"==typeof e)(e)?t.booleansAsIntegers?r.append(s,e?1:0):r.append(s,e):l(e)?e.length?e.forEach(((e,o)=>{const a=s+"["+(t.indices?o:"")+"]";h(e,t,r,a)})):t.allowEmptyArrays&&r.append(s+"[]",""):(e=>e instanceof Date)(e)?r.append(s,e.toISOString()):!(e=>e===Object(e))(e)||(e=>c(e)&&"string"==typeof e.name&&("object"==typeof e.lastModifiedDate||"number"==typeof e.lastModified))(e)||c(e)?r.append(s,e):Object.keys(e).forEach((o=>{const a=e[o];if(l(a))for(;o.length>2&&o.lastIndexOf("[]")===o.length-2;)o=o.substring(0,o.length-2);h(a,t,r,s?s+"["+o+"]":o)}))),r);var u={serialize:h};function d(e){if(null===e||"object"!=typeof e)return e;const t=Array.isArray(e)?[]:{};return Object.keys(e).forEach((r=>{t[r]=d(e[r])})),t}function p(e){return Array.isArray(e)?e:[e]}function f(e){return e instanceof File||e instanceof Blob||e instanceof FileList||"object"==typeof e&&null!==e&&void 0!==Object.values(e).find((e=>f(e)))}class y{constructor(){this.errors={},this.errors={}}set(e,t){"object"==typeof e?this.errors=e:this.set(a(a({},this.errors),{[e]:p(t)}))}all(){return this.errors}has(e){return Object.prototype.hasOwnProperty.call(this.errors,e)}hasAny(...e){return e.some((e=>this.has(e)))}any(){return Object.keys(this.errors).length>0}get(e){if(this.has(e))return this.getAll(e)[0]}getAll(e){return p(this.errors[e]||[])}only(...e){const t=[];return e.forEach((e=>{const r=this.get(e);r&&t.push(r)})),t}flatten(){return Object.values(this.errors).reduce(((e,t)=>e.concat(t)),[])}clear(e){const t={};e&&Object.keys(this.errors).forEach((r=>{r!==e&&(t[r]=this.errors[r])})),this.set(t)}}class g{constructor(e={}){this.originalData={},this.busy=!1,this.successful=!1,this.errors=new y,this.progress=void 0,this.update(e)}static make(e){return new this(e)}update(e){this.originalData=Object.assign({},this.originalData,d(e)),Object.assign(this,e)}fill(e={}){this.keys().forEach((t=>{this[t]=e[t]}))}data(){return this.keys().reduce(((e,t)=>a(a({},e),{[t]:this[t]})),{})}keys(){return Object.keys(this).filter((e=>!g.ignore.includes(e)))}startProcessing(){this.errors.clear(),this.busy=!0,this.successful=!1,this.progress=void 0}finishProcessing(){this.busy=!1,this.successful=!0,this.progress=void 0}clear(){this.errors.clear(),this.successful=!1,this.progress=void 0}reset(){Object.keys(this).filter((e=>!g.ignore.includes(e))).forEach((e=>{this[e]=d(this.originalData[e])}))}get(e,t={}){return this.submit("get",e,t)}post(e,t={}){return this.submit("post",e,t)}patch(e,t={}){return this.submit("patch",e,t)}put(e,t={}){return this.submit("put",e,t)}delete(e,t={}){return this.submit("delete",e,t)}submit(e,t,r={}){return this.startProcessing(),r=a({data:{},params:{},url:this.route(t),method:e,onUploadProgress:this.handleUploadProgress.bind(this)},r),"get"===e.toLowerCase()?r.params=a(a({},this.data()),r.params):(r.data=a(a({},this.data()),r.data),f(r.data)&&(r.transformRequest=[e=>u.serialize(e)])),new Promise(((e,t)=>{(g.axios||(axios__WEBPACK_IMPORTED_MODULE_0___default())).request(r).then((t=>{this.finishProcessing(),e(t)})).catch((e=>{this.handleErrors(e),t(e)}))}))}handleErrors(e){this.busy=!1,this.progress=void 0,e.response&&this.errors.set(this.extractErrors(e.response))}extractErrors(e){return e.data&&"object"==typeof e.data?e.data.errors?a({},e.data.errors):e.data.message?{error:e.data.message}:a({},e.data):{error:g.errorMessage}}handleUploadProgress(e){this.progress={total:e.total,loaded:e.loaded,percentage:Math.round(100*e.loaded/e.total)}}route(e,t={}){let r=e;return Object.prototype.hasOwnProperty.call(g.routes,e)&&(r=decodeURI(g.routes[e])),"object"!=typeof t&&(t={id:t}),Object.keys(t).forEach((e=>{r=r.replace(`{${e}}`,t[e])})),r}onKeydown(e){const t=e.target;t.name&&this.errors.clear(t.name)}}g.routes={},g.errorMessage="Something went wrong. Please try again.",g.ignore=["busy","successful","errors","progress","originalData"];/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (g);
+
+
+/***/ }),
+
 /***/ "./resources/js/components/backend/category/CreateCategory.vue":
 /*!*********************************************************************!*\
   !*** ./resources/js/components/backend/category/CreateCategory.vue ***!
@@ -37759,7 +37804,182 @@ var render = function() {
               1
             ),
             _vm._v(" "),
-            _vm._m(0)
+            _c(
+              "form",
+              {
+                staticClass: "form-horizontal",
+                on: {
+                  submit: function($event) {
+                    $event.preventDefault()
+                    return _vm.addCategory($event)
+                  }
+                }
+              },
+              [
+                _c("div", { staticClass: "card-body" }, [
+                  _c("div", { staticClass: "form-group row" }, [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-sm-4 col-form-label",
+                        attrs: { for: "inputEmail3" }
+                      },
+                      [_vm._v("Category Name")]
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-sm-8" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.form.name,
+                            expression: "form.name"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "text",
+                          id: "inputEmail3",
+                          name: "name",
+                          placeholder: "Enter Category Name"
+                        },
+                        domProps: { value: _vm.form.name },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(_vm.form, "name", $event.target.value)
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _vm.form.errors.has("name")
+                        ? _c("div", {
+                            staticClass: "text-danger",
+                            domProps: {
+                              innerHTML: _vm._s(_vm.form.errors.get("name"))
+                            }
+                          })
+                        : _vm._e()
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group row" }, [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-sm-4 col-form-label",
+                        attrs: { for: "inputEmail3" }
+                      },
+                      [_vm._v("Status")]
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-sm-8" }, [
+                      _c(
+                        "div",
+                        {
+                          staticClass:
+                            "custom-control custom-radio custom-control-inline"
+                        },
+                        [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.form.status,
+                                expression: "form.status"
+                              }
+                            ],
+                            staticClass: "custom-control-input",
+                            attrs: {
+                              type: "radio",
+                              id: "customRadioInline1",
+                              name: "status",
+                              value: "active"
+                            },
+                            domProps: {
+                              checked: _vm._q(_vm.form.status, "active")
+                            },
+                            on: {
+                              change: function($event) {
+                                return _vm.$set(_vm.form, "status", "active")
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c(
+                            "label",
+                            {
+                              staticClass: "custom-control-label",
+                              attrs: { for: "customRadioInline1" }
+                            },
+                            [_vm._v("Active")]
+                          )
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        {
+                          staticClass:
+                            "custom-control custom-radio custom-control-inline"
+                        },
+                        [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.form.status,
+                                expression: "form.status"
+                              }
+                            ],
+                            staticClass: "custom-control-input",
+                            attrs: {
+                              type: "radio",
+                              id: "customRadioInline2",
+                              name: "status",
+                              value: "inactive"
+                            },
+                            domProps: {
+                              checked: _vm._q(_vm.form.status, "inactive")
+                            },
+                            on: {
+                              change: function($event) {
+                                return _vm.$set(_vm.form, "status", "inactive")
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c(
+                            "label",
+                            {
+                              staticClass: "custom-control-label",
+                              attrs: { for: "customRadioInline2" }
+                            },
+                            [_vm._v("Inactive")]
+                          )
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _vm.form.errors.has("status")
+                        ? _c("div", {
+                            staticClass: "text-danger",
+                            domProps: {
+                              innerHTML: _vm._s(_vm.form.errors.get("status"))
+                            }
+                          })
+                        : _vm._e()
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _vm._m(0)
+              ]
+            )
           ])
         ])
       ])
@@ -37771,115 +37991,19 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("form", { staticClass: "form-horizontal" }, [
-      _c("div", { staticClass: "card-body" }, [
-        _c("div", { staticClass: "form-group row" }, [
-          _c(
-            "label",
-            {
-              staticClass: "col-sm-4 col-form-label",
-              attrs: { for: "inputEmail3" }
-            },
-            [_vm._v("Category Name")]
-          ),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-sm-8" }, [
-            _c("input", {
-              staticClass: "form-control",
-              attrs: {
-                type: "text",
-                id: "inputEmail3",
-                name: "name",
-                placeholder: "Enter Category Name"
-              }
-            })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "form-group row" }, [
-          _c(
-            "label",
-            {
-              staticClass: "col-sm-4 col-form-label",
-              attrs: { for: "inputEmail3" }
-            },
-            [_vm._v("Status")]
-          ),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-sm-8" }, [
-            _c(
-              "div",
-              {
-                staticClass: "custom-control custom-radio custom-control-inline"
-              },
-              [
-                _c("input", {
-                  staticClass: "custom-control-input",
-                  attrs: {
-                    type: "radio",
-                    id: "customRadioInline1",
-                    name: "status",
-                    value: "active"
-                  }
-                }),
-                _vm._v(" "),
-                _c(
-                  "label",
-                  {
-                    staticClass: "custom-control-label",
-                    attrs: { for: "customRadioInline1" }
-                  },
-                  [_vm._v("Active")]
-                )
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              {
-                staticClass: "custom-control custom-radio custom-control-inline"
-              },
-              [
-                _c("input", {
-                  staticClass: "custom-control-input",
-                  attrs: {
-                    type: "radio",
-                    id: "customRadioInline2",
-                    name: "status",
-                    value: "inactive"
-                  }
-                }),
-                _vm._v(" "),
-                _c(
-                  "label",
-                  {
-                    staticClass: "custom-control-label",
-                    attrs: { for: "customRadioInline2" }
-                  },
-                  [_vm._v("Inactive")]
-                )
-              ]
-            )
-          ])
-        ])
+    return _c("div", { staticClass: "card-footer" }, [
+      _c("button", { staticClass: "btn btn-info", attrs: { type: "submit" } }, [
+        _vm._v("Add Category")
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "card-footer" }, [
-        _c(
-          "button",
-          { staticClass: "btn btn-info", attrs: { type: "submit" } },
-          [_vm._v("Add Category")]
-        ),
-        _vm._v(" "),
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-default float-right",
-            attrs: { type: "reset" }
-          },
-          [_vm._v("Reset")]
-        )
-      ])
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-default float-right",
+          attrs: { type: "reset" }
+        },
+        [_vm._v("Reset")]
+      )
     ])
   }
 ]
@@ -53391,6 +53515,18 @@ Vue.compile = compileToFunctions;
 /******/ 				}
 /******/ 			}
 /******/ 			return result;
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/compat get default export */
+/******/ 	(() => {
+/******/ 		// getDefaultExport function for compatibility with non-harmony modules
+/******/ 		__webpack_require__.n = (module) => {
+/******/ 			var getter = module && module.__esModule ?
+/******/ 				() => (module['default']) :
+/******/ 				() => (module);
+/******/ 			__webpack_require__.d(getter, { a: getter });
+/******/ 			return getter;
 /******/ 		};
 /******/ 	})();
 /******/ 	
