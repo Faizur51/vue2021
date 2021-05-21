@@ -69,7 +69,15 @@ export default {
         addCategory:function () {
             this.form.post('/add-category')
             .then(function (data){
-                console.log(data)
+                Toast.fire({
+                    icon: 'success',
+                    title: 'Category Add successfully'
+                })
+            }).catch(function (data){
+                Toast.fire({
+                    icon: 'warning',
+                    title: 'Category Add Not successfully'
+                })
             })
         }
  }
