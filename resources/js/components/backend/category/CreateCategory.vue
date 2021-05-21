@@ -67,12 +67,17 @@ export default {
    },
  methods:{
         addCategory:function () {
+            let test=this
             this.form.post('/add-category')
             .then(function (data){
                 Toast.fire({
                     icon: 'success',
                     title: 'Category Add successfully'
                 })
+              //test.$router.push('/categories')
+                test.form.name=null
+                test.form.status=null
+
             }).catch(function (data){
                 Toast.fire({
                     icon: 'warning',
