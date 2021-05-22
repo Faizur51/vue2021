@@ -48,9 +48,22 @@ const router =new VueRouter({
 })
 
 
+//vuex
+import Vuex from 'vuex'
+
+Vue.use(Vuex)
+
+import storeData from "./store/store";
+const store = new Vuex.Store(
+    storeData
+)
+
+
+
 //Vue.component('home', require('./components/backend/home/HomeComponent.vue').default);
 
 const app = new Vue({
     el: '#app',
-    router
+    router,
+    store
 });

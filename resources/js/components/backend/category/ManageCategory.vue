@@ -26,6 +26,7 @@
                         <td>Fix and squish bugs</td>
                     </tr>
                     </tbody>
+{{some}}
                 </table>
             </div>
             <!-- /.card-body -->
@@ -46,6 +47,13 @@
 <script>
 export default {
     name: "ManageComponent",
+
+    computed:{
+        some(){
+            return this.$store.getters.test;
+        }
+    }
+
 }
 </script>
 
