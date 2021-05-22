@@ -46,7 +46,7 @@ class CategoryController extends Controller
         Category::create([
             'user_id'=>auth()->user()->id,
             'name'=>$request->name,
-            'slug'=>$request->name,
+            'slug'=>slugify($request->name),
             'status'=>$request->status
         ]);
     }
