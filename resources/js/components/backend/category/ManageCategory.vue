@@ -82,13 +82,32 @@ export default {
            return data[status];
         },
         removeCategory(id){
-           axios.get('remove-category/'+id).then((response)=>{
 
-               toastr.info(response.data.category.name +' Category delete successfully.')
-               this.$store.dispatch('getCategory')
-           }).catch((response)=>{
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                  /*  Swal.fire(
+                        'Deleted!',
+                        'Your file has been deleted.',
+                        'success'
+                    )*/
+                    axios.get('remove-category/'+id).then((response)=>{
+                     toastr.info(response.data.category.name +' Category delete successfully.')
+                     this.$store.dispatch('getCategory')
+                     }).catch((response)=>{
 
-           })
+                    })
+
+                }
+            })
+
         },
         emptydata(){
            return (this.category.length <1)
