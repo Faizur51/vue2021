@@ -22,7 +22,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
-//Route::get('/category', [CategoryController::class, 'index'])->name('category');
-//Route::get('/post', [PostController::class, 'index'])->name('post');
-Route::get('/{anypath}', [HomeController::class, 'index'])->where('path','.*');
+//Route::get('/{anypath}', [HomeController::class, 'index'])->where('path','.*');
 Route::post('/add-category', [CategoryController::class, 'store'])->name('add-category');
+Route::get('/get-category', [CategoryController::class, 'index']);
+Route::get('/remove-category/{id}', [CategoryController::class, 'destroy']);

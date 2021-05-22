@@ -25,11 +25,11 @@
                                 <label for="inputEmail3" class="col-sm-4 col-form-label">Status</label>
                                 <div class="col-sm-8">
                                     <div class="custom-control custom-radio custom-control-inline">
-                                        <input type="radio" id="customRadioInline1" name="status" class="custom-control-input" value="active" v-model="form.status" >
+                                        <input type="radio" id="customRadioInline1" name="status" class="custom-control-input" value=1 v-model="form.status" >
                                         <label class="custom-control-label" for="customRadioInline1">Active</label>
                                     </div>
                                     <div class="custom-control custom-radio custom-control-inline">
-                                        <input type="radio" id="customRadioInline2" name="status" class="custom-control-input" value="inactive" v-model="form.status">
+                                        <input type="radio" id="customRadioInline2" name="status" class="custom-control-input" value=0 v-model="form.status">
                                         <label class="custom-control-label" for="customRadioInline2">Inactive</label>
                                     </div>
                                     <div v-if="form.errors.has('status')" class="text-danger" v-html="form.errors.get('status')" />

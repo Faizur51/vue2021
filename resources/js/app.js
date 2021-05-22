@@ -44,7 +44,7 @@ import {routes} from './routes/routes'
 
 const router =new VueRouter({
     routes,
-    mode: 'history',
+    //mode: 'history',
 })
 
 

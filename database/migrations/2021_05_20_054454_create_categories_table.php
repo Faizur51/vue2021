@@ -18,7 +18,7 @@ class CreateCategoriesTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->string('name')->unique();
             $table->string('slug')->unique();
-            $table->enum('status',['active','inactive'])->default('active');
+            $table->string('status');
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();
         });

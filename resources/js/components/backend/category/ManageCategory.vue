@@ -18,15 +18,24 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>4.</td>
-                        <td>Fix and squish bugs</td>
-                        <td>Fix and squish bugs</td>
-                        <td><span class="badge bg-success">Active</span></td>
-                        <td>Fix and squish bugs</td>
+                    <tr v-for="(categories,index) in category">
+                        <td>{{++index}}</td>
+                        <td>{{categories.name}}</td>
+                        <td>{{categories.user.name}}</td>
+                        <td><span class="badge" :class="statusColor(categories.status)">{{statusName(categories.status)}}</span></td>
+                        <td>
+                            <button class="btn btn-primary btn-sm" @click="removeCategory(categories.id)">Delete</button>
+                            <router-link to="" class="btn btn-success btn-sm">Edit</router-link>
+
+                        </td>
+                    </tr>
+                    <tr v-if="emptydata()">
+                        <td colspan="5">
+                            <h5 class="text-center text-danger">Data not Found</h5>
+                        </td>
                     </tr>
                     </tbody>
-{{some}}
+
                 </table>
             </div>
             <!-- /.card-body -->
@@ -49,8 +58,40 @@ export default {
     name: "ManageComponent",
 
     computed:{
-        some(){
-            return this.$store.getters.test;
+        category(){
+            return this.$store.getters.categories;
+        }
+    },
+
+    mounted() {
+        this.$store.dispatch('getCategory')
+    },
+    methods:{
+       statusName(status){
+           let data={
+               0:'inactive',
+               1:'active'
+           }
+           return data[status];
+       },
+        statusColor(status){
+           let data={
+               0:'bg-danger',
+               1:'bg-success'
+           }
+           return data[status];
+        },
+        removeCategory(id){
+           axios.get('remove-category/'+id).then((response)=>{
+
+               toastr.info(response.data.category.name +' Category delete successfully.')
+               this.$store.dispatch('getCategory')
+           }).catch((response)=>{
+
+           })
+        },
+        emptydata(){
+           return (this.category.length <1)
         }
     }
 

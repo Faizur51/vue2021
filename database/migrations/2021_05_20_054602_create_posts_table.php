@@ -21,7 +21,7 @@ class CreatePostsTable extends Migration
             $table->string('slug')->unique();
             $table->string('content');
             $table->string('image')->nullable();
-            $table->enum('status',['active','inactive'])->default('active');
+            $table->string('status');
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();
             $table->foreign('category_id')->references('id')->on('categories')->cascadeOnDelete();

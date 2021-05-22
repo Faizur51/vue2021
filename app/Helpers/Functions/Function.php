@@ -27,8 +27,8 @@ function slugify($text)
 
 function randomStatus(){
     $status=[
-        'active'=>'active',
-        'inactive'=>'inactive'
+        0=>'active',
+        1=>'inactive'
     ];
     return array_rand($status,1);
 }

@@ -2010,11 +2010,51 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "ManageComponent",
   computed: {
-    some: function some() {
-      return this.$store.getters.test;
+    category: function category() {
+      return this.$store.getters.categories;
+    }
+  },
+  mounted: function mounted() {
+    this.$store.dispatch('getCategory');
+  },
+  methods: {
+    statusName: function statusName(status) {
+      var data = {
+        0: 'inactive',
+        1: 'active'
+      };
+      return data[status];
+    },
+    statusColor: function statusColor(status) {
+      var data = {
+        0: 'bg-danger',
+        1: 'bg-success'
+      };
+      return data[status];
+    },
+    removeCategory: function removeCategory(id) {
+      var _this = this;
+
+      axios.get('remove-category/' + id).then(function (response) {
+        toastr.info(response.data.category.name + ' Category delete successfully.');
+
+        _this.$store.dispatch('getCategory');
+      })["catch"](function (response) {});
+    },
+    emptydata: function emptydata() {
+      return this.category.length < 1;
     }
   }
 });
@@ -2104,8 +2144,8 @@ Vue.use(vue_router__WEBPACK_IMPORTED_MODULE_3__.default); //routes
 
 
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_3__.default({
-  routes: _routes_routes__WEBPACK_IMPORTED_MODULE_4__.routes,
-  mode: 'history'
+  routes: _routes_routes__WEBPACK_IMPORTED_MODULE_4__.routes //mode: 'history',
+
 }); //vuex
 
 
@@ -2210,16 +2250,24 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   state: {
-    count: 45
+    categoryData: []
   },
   getters: {
-    test: function test(state) {
-      return state.count;
+    categories: function categories(state) {
+      return state.categoryData;
+    }
+  },
+  actions: {
+    getCategory: function getCategory(data) {
+      axios.get("get-category").then(function (response) {
+        //console.log(response.data.category)
+        data.commit('ourcategories', response.data.category);
+      })["catch"](function (error) {});
     }
   },
   mutations: {
-    increment: function increment(state) {
-      state.count++;
+    ourcategories: function ourcategories(state, result) {
+      state.categoryData = result;
     }
   }
 });
@@ -41566,14 +41614,12 @@ var render = function() {
                               type: "radio",
                               id: "customRadioInline1",
                               name: "status",
-                              value: "active"
+                              value: "1"
                             },
-                            domProps: {
-                              checked: _vm._q(_vm.form.status, "active")
-                            },
+                            domProps: { checked: _vm._q(_vm.form.status, "1") },
                             on: {
                               change: function($event) {
-                                return _vm.$set(_vm.form, "status", "active")
+                                return _vm.$set(_vm.form, "status", "1")
                               }
                             }
                           }),
@@ -41610,14 +41656,12 @@ var render = function() {
                               type: "radio",
                               id: "customRadioInline2",
                               name: "status",
-                              value: "inactive"
+                              value: "0"
                             },
-                            domProps: {
-                              checked: _vm._q(_vm.form.status, "inactive")
-                            },
+                            domProps: { checked: _vm._q(_vm.form.status, "0") },
                             on: {
                               change: function($event) {
-                                return _vm.$set(_vm.form, "status", "inactive")
+                                return _vm.$set(_vm.form, "status", "0")
                               }
                             }
                           }),
@@ -41721,8 +41765,62 @@ var render = function() {
         _c("table", { staticClass: "table table-bordered" }, [
           _vm._m(0),
           _vm._v(" "),
-          _vm._m(1),
-          _vm._v("\n" + _vm._s(_vm.some) + "\n                ")
+          _c(
+            "tbody",
+            [
+              _vm._l(_vm.category, function(categories, index) {
+                return _c("tr", [
+                  _c("td", [_vm._v(_vm._s(++index))]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(_vm._s(categories.name))]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(_vm._s(categories.user.name))]),
+                  _vm._v(" "),
+                  _c("td", [
+                    _c(
+                      "span",
+                      {
+                        staticClass: "badge",
+                        class: _vm.statusColor(categories.status)
+                      },
+                      [_vm._v(_vm._s(_vm.statusName(categories.status)))]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    [
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-primary btn-sm",
+                          on: {
+                            click: function($event) {
+                              return _vm.removeCategory(categories.id)
+                            }
+                          }
+                        },
+                        [_vm._v("Delete")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "router-link",
+                        {
+                          staticClass: "btn btn-success btn-sm",
+                          attrs: { to: "" }
+                        },
+                        [_vm._v("Edit")]
+                      )
+                    ],
+                    1
+                  )
+                ])
+              }),
+              _vm._v(" "),
+              _vm.emptydata() ? _c("tr", [_vm._m(1)]) : _vm._e()
+            ],
+            2
+          )
         ])
       ]),
       _vm._v(" "),
@@ -41753,19 +41851,9 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("tbody", [
-      _c("tr", [
-        _c("td", [_vm._v("4.")]),
-        _vm._v(" "),
-        _c("td", [_vm._v("Fix and squish bugs")]),
-        _vm._v(" "),
-        _c("td", [_vm._v("Fix and squish bugs")]),
-        _vm._v(" "),
-        _c("td", [
-          _c("span", { staticClass: "badge bg-success" }, [_vm._v("Active")])
-        ]),
-        _vm._v(" "),
-        _c("td", [_vm._v("Fix and squish bugs")])
+    return _c("td", { attrs: { colspan: "5" } }, [
+      _c("h5", { staticClass: "text-center text-danger" }, [
+        _vm._v("Data not Found")
       ])
     ])
   },
