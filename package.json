@@ -28,6 +28,7 @@
         "@fortawesome/fontawesome-free": "^5.15.3",
         "admin-lte": "^3.1.0",
         "sweetalert2": "^11.0.9",
+        "toastr": "^2.1.4",
         "vform": "^2.0.4",
         "vue-router": "^3.5.1"
     }

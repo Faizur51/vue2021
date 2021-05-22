@@ -70,10 +70,11 @@ export default {
             let test=this
             this.form.post('/add-category')
             .then(function (data){
-                Toast.fire({
+                /*Toast.fire({
                     icon: 'success',
                     title: 'Category Add successfully'
-                })
+                })*/
+                toastr.info('Category Add successfully.', 'Turtle Bay Resort', {timeOut: 5000,closeButton: true,positionClass: "toast-bottom-left"})
               //test.$router.push('/categories')
                 test.form.name=null
                 test.form.status=null

@@ -27,6 +27,14 @@ const Toast = Swal.mixin({
 
 window.Toast=Toast
 
+//toastr
+
+import toastr from 'toastr'
+
+window.toastr=toastr
+
+
+
 //vue router
 import VueRouter from 'vue-router'
 Vue.use(VueRouter)
