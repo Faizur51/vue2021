@@ -14,20 +14,10 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories=Category::with('user')->select('id','user_id','name','slug','status')->get();
+        $categories=Category::with('user')->select('id','user_id','name','slug','status','created_at')->get();
         return response()->json([
             'category'=>$categories
         ],200);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -52,25 +42,18 @@ class CategoryController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($slug)
     {
-        //
+        $category=Category::where('slug',$slug)->first();
+
+        return response()->json([
+            'category'=>$category
+        ]);
     }
 
     /**
@@ -80,9 +63,24 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $slug)
     {
-        //
+        $request->validate([
+            'name'=>'required|unique:categories,id,'.$request->id,
+            'status'=>'required'
+        ]);
+
+        $category=Category::where('slug',$slug)->first();
+
+       $category->user_id=auth()->user()->id;
+       $category->name=$request->name;
+       $category->slug=slugify($request->name);
+       $category->status=$request->status;
+       $category->save();
+
+        return response()->json([
+            'category'=>$category
+        ]);
     }
 
     /**

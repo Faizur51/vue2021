@@ -5,12 +5,13 @@
             <div class="col-md-6 offset-3">
                 <div class="card card-info">
                     <div class="card-header">
-                        <h3 class="card-title">Add Category</h3>
+                        <h3 class="card-title">Edit Category</h3>
+                        {{this.$route.params.slug}}
                         <router-link to='/categories' class="card-title float-right">Manage Category</router-link>
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
-                    <form class="form-horizontal" @submit.prevent="addCategory">
+                    <form class="form-horizontal" @submit.prevent="updateCategory">
                         <div class="card-body">
                             <div class="form-group row">
                                 <label for="inputEmail3" class="col-sm-4 col-form-label">Category Name</label>
@@ -35,10 +36,11 @@
                                     <div v-if="form.errors.has('status')" class="text-danger" v-html="form.errors.get('status')" />
                                 </div>
                             </div>
+
                         </div>
                         <!-- /.card-body -->
                         <div class="card-footer">
-                            <button type="submit"  class="btn btn-info">Add Category</button>
+                            <button type="submit"  class="btn btn-info">Update Category</button>
                             <button type="reset" class="btn btn-default float-right">Reset</button>
                         </div>
                         <!-- /.card-footer -->
@@ -64,19 +66,22 @@ export default {
 
         }
    },
- methods:{
-        addCategory:function () {
+
+    mounted() {
+        this.getCategory();
+    },
+    methods:{
+        updateCategory:function () {
             let test=this
-            this.form.post('/add-category')
-            .then(function (data){
+            this.form.post('/update-category/'+this.$route.params.slug)
+            .then(function (response){
                 /*Toast.fire({
                     icon: 'success',
                     title: 'Category Add successfully'
                 })*/
-                toastr.info('Category Add successfully.', 'Turtle Bay Resort', {timeOut: 5000,closeButton: true,positionClass: "toast-bottom-left"})
-              //test.$router.push('/categories')
-                test.form.name=null
-                test.form.status=null
+              /*console.log(response.data.category.name)*/
+                toastr.info(response.data.category.name +' Category  has been Update successfully.')
+                test.$router.push('/categories')
 
             }).catch(function (data){
                 Toast.fire({
@@ -84,7 +89,17 @@ export default {
                     title: 'Category Add Not successfully'
                 })
             })
-        }
+        },
+
+     getCategory:function (){
+       let test=this
+        axios.get('/edit-category/'+this.$route.params.slug).then(function (response){
+            //console.log(response.data.category)
+            test.form.fill(response.data.category)
+        }).catch(function (error){
+
+        })
+     }
  }
 
 }

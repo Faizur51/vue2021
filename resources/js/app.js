@@ -58,7 +58,8 @@ const store = new Vuex.Store(
     storeData
 )
 
-
+//moment
+import {filter} from './filter/filter'
 
 //Vue.component('home', require('./components/backend/home/HomeComponent.vue').default);
 

@@ -23,6 +23,10 @@ Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 //Route::get('/{anypath}', [HomeController::class, 'index'])->where('path','.*');
-Route::post('/add-category', [CategoryController::class, 'store'])->name('add-category');
+
+//category
+Route::post('/add-category', [CategoryController::class, 'store']);
 Route::get('/get-category', [CategoryController::class, 'index']);
 Route::get('/remove-category/{id}', [CategoryController::class, 'destroy']);
+Route::get('/edit-category/{slug}', [CategoryController::class, 'edit']);
+Route::post('/update-category/{slug}', [CategoryController::class, 'update']);
