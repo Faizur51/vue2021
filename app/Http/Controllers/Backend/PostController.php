@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Post;
+use Image;
 class PostController extends Controller
 {
     /**
@@ -39,15 +40,31 @@ class PostController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name'=>'required|unique:categories',
+            'title'=>'required|unique:posts',
+            'content'=>'required',
             'status'=>'required'
         ]);
 
-        Post::create([
+        $file=$request->image;
+        $fileNew=explode(';',$file);
+        $file_ex=explode('/',$fileNew[0]);
+        $file_ex= end($file_ex);
+        $fileName=slugify($request->title).'.'.$file_ex;
+
+        $posts=Post::create([
             'user_id'=>auth()->user()->id,
-            'name'=>$request->name,
-            'slug'=>slugify($request->name),
+            'category_id'=>$request->category_id,
+            'title'=>$request->title,
+            'content'=>$request->content,
+            'image'=>$fileName,
+            'slug'=>slugify($request->title),
             'status'=>$request->status
+        ]);
+
+        Image::make($request->image)->resize(300, 200)->save(public_path('assets/images/posts/'.$fileName));
+
+        return response()->json([
+            'post'=>$posts
         ]);
     }
 

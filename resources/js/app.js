@@ -61,9 +61,15 @@ const store = new Vuex.Store(
 //moment
 import {filter} from './filter/filter'
 
-
+//ichecker-bootstrap
 import icheck from 'icheck-bootstrap'
 Vue.use(icheck)
+
+
+//ckeditor-5
+import CKEditor from '@ckeditor/ckeditor5-vue2';
+Vue.use( CKEditor );
+
 
 //Vue.component('home', require('./components/backend/home/HomeComponent.vue').default);
 
