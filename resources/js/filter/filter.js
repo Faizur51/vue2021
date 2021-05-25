@@ -5,3 +5,7 @@ Vue.filter('time',function (value){
    //return  moment(value).add(10, 'days').calendar();
     return moment(value).format('lll');
 })
+
+Vue.filter('subString',function (content,length){
+   return content.substring(0,length)
+})

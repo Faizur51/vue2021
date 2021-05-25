@@ -23,7 +23,8 @@ class PostSeeder extends Seeder
                 'title'=>$name,
                 'slug'=>slugify($name),
                 'content'=>$faker->paragraph,
-                'image'=>$faker->imageUrl(),
+                 'image'=>$faker->imageUrl(),
+                 //'image'=>$faker->image('public/assets/images/posts',400,300),
                 'status'=>randomStatus(),
             ]);
         }

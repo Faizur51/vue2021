@@ -61,6 +61,10 @@ const store = new Vuex.Store(
 //moment
 import {filter} from './filter/filter'
 
+
+import icheck from 'icheck-bootstrap'
+Vue.use(icheck)
+
 //Vue.component('home', require('./components/backend/home/HomeComponent.vue').default);
 
 const app = new Vue({

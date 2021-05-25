@@ -30,3 +30,11 @@ Route::get('/get-category', [CategoryController::class, 'index']);
 Route::get('/remove-category/{id}', [CategoryController::class, 'destroy']);
 Route::get('/edit-category/{slug}', [CategoryController::class, 'edit']);
 Route::post('/update-category/{slug}', [CategoryController::class, 'update']);
+
+
+//post
+Route::post('/add-post', [PostController::class, 'store']);
+Route::get('/get-post', [PostController::class, 'index']);
+Route::get('/remove-post/{id}', [PostController::class, 'destroy']);
+Route::get('/edit-post/{slug}', [PostController::class, 'edit']);
+Route::post('/update-post/{slug}', [PostController::class, 'update']);

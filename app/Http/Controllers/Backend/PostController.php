@@ -14,8 +14,10 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts=Post::with('user','category')->select('id','user_id','category_id','title','slug','content','status')->get();
-        return $posts;
+        $posts=Post::with('user','category')->select('id','user_id','category_id','title','slug','content','image','status')->get();
+        return response()->json([
+            'post'=>$posts
+        ]);
     }
 
     /**
@@ -36,7 +38,17 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name'=>'required|unique:categories',
+            'status'=>'required'
+        ]);
+
+        Post::create([
+            'user_id'=>auth()->user()->id,
+            'name'=>$request->name,
+            'slug'=>slugify($request->name),
+            'status'=>$request->status
+        ]);
     }
 
     /**
@@ -81,6 +93,10 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $posts=Post::find($id);
+        $posts->delete();
+        return response()->json([
+            'post'=>$posts
+        ],200);
     }
 }

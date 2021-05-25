@@ -2,8 +2,8 @@
     <div class="col-md-12">
         <div class="card">
             <div class="card-header">
-                <h3 class="card-title">Manage Category</h3>
-                <router-link to='/addCategory' class="card-title float-right btn btn-info btn-sm">Add Category</router-link>
+                <h3 class="card-title">Manage Post</h3>
+                <router-link to='/addPost' class="card-title float-right btn btn-info btn-sm">Add Post</router-link>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
@@ -11,42 +11,53 @@
                     <thead>
                     <tr>
                         <th>
-                            <div class="custom-control custom-checkbox">
-                                <input class="custom-control-input custom-control-input-danger custom-control-input-outline" type="checkbox" id="customCheckbox5">
-                                <label for="customCheckbox5" class="custom-control-label"></label>
+                            <div class="checkbox icheck-alizarin">
+                                <input type="checkbox"  id="alizarin1" />
+                                <label for="alizarin1"></label>
                             </div>
                         </th>
-                        <th style="width:100px">Sl No</th>
+                        <th style="width:100px">Sl</th>
                         <th>Category Name</th>
+                        <th>Title</th>
                         <th>Slug</th>
+                        <th>Content</th>
+                        <th>Thumbnail</th>
                         <th>user</th>
-                        <th>Create At</th>
                         <th>Status</th>
                         <th style="width: 150px">Action</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr v-for="(categories,index) in category">
+                    <tr v-for="(posts,index) in post">
                         <td>
-                            <div class="custom-control custom-checkbox">
+<!--                            <div class="custom-control custom-checkbox">
                                 <input class="custom-control-input custom-control-input-danger custom-control-input-outline" type="checkbox" id="customCheckbox1">
                                 <label for="customCheckbox1" class="custom-control-label"></label>
+                            </div>-->
+
+                            <div class="checkbox icheck-alizarin">
+                                <input type="checkbox"  id="alizarin" />
+                                <label for="alizarin"></label>
                             </div>
+
                         </td>
                         <td>{{++index}}</td>
-                        <td  class="text-capitalize">{{categories.name}}</td>
-                        <td>{{categories.slug}}</td>
-                        <td>{{categories.user.name}}</td>
-                        <td>{{categories.created_at |time}}</td>
-                        <td><span class="badge" :class="statusColor(categories.status)">{{statusName(categories.status)}}</span></td>
+                        <td>{{posts.category.name}}</td>
+                        <td  class="text-capitalize">{{posts.title}}</td>
+
+                        <td>{{posts.slug}}</td>
+                        <td>{{posts.content | subString(20)}}</td>
+                        <td><img :src="posts.image" alt="" style="width: 60px"></td>
+                        <td>{{posts.user.name}}</td>
+                        <td><span class="badge" :class="statusColor(posts.status)">{{statusName(posts.status)}}</span></td>
                         <td>
-                            <button class="btn btn-primary btn-sm" @click="removeCategory(categories.id)">Delete</button>
-                            <router-link  :to="`/editCategory/${categories.slug}`" class="btn btn-success btn-sm">Edit</router-link>
+                            <button class="btn btn-primary btn-sm" @click="removePost(posts.id)">Delete</button>
+                            <router-link  :to="`/editPost/${posts.slug}`" class="btn btn-success btn-sm">Edit</router-link>
 
                         </td>
                     </tr>
                     <tr v-if="emptydata()">
-                        <td colspan="8">
+                        <td colspan="10">
                             <h5 class="text-center text-danger">Data not Found</h5>
                         </td>
                     </tr>
@@ -74,13 +85,13 @@ export default {
     name: "ManageComponent",
 
     computed:{
-        category(){
-            return this.$store.getters.categories;
+        post(){
+            return this.$store.getters.posts;
         }
     },
 
     mounted() {
-        this.$store.dispatch('getCategory')
+        this.$store.dispatch('getPost')
     },
     methods:{
        statusName(status){
@@ -97,7 +108,7 @@ export default {
            }
            return data[status];
         },
-        removeCategory(id){
+        removePost(id){
 
             Swal.fire({
                 title: 'Are you sure?',
@@ -114,9 +125,9 @@ export default {
                         'Your file has been deleted.',
                         'success'
                     )*/
-                    axios.get('remove-category/'+id).then((response)=>{
-                     toastr.info(response.data.category.name +' Category delete successfully.')
-                     this.$store.dispatch('getCategory')
+                    axios.get('remove-post/'+id).then((response)=>{
+                     toastr.info(response.data.post.name +' Category delete successfully.')
+                     this.$store.dispatch('getPost')
                      }).catch((response)=>{
 
                     })
@@ -126,7 +137,7 @@ export default {
 
         },
         emptydata(){
-           return (this.category.length <1)
+           return (this.post.length <1)
         }
     }
 
