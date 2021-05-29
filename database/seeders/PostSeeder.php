@@ -18,12 +18,12 @@ class PostSeeder extends Seeder
         foreach (range(1,20) as $index){
             $name=$faker->name;
             Post::create([
-                'user_id'=>rand(1,21),
+                'user_id'=>rand(1,20),
                 'category_id'=>rand(1,20),
                 'title'=>$name,
                 'slug'=>slugify($name),
                 'content'=>$faker->paragraph,
-                 'image'=>$faker->imageUrl(),
+                'image'=>$faker->imageUrl(),
                  //'image'=>$faker->image('public/assets/images/posts',400,300),
                 'status'=>randomStatus(),
             ]);

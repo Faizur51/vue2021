@@ -12,15 +12,13 @@
                     <!-- form start -->
                     <form class="form-horizontal" @submit.prevent="addPost" enctype="multipart/form-data">
                         <div class="card-body">
-
                             <div class="form-group row">
                                 <label for="inputEmail3" class="col-sm-2 col-form-label">Category Name</label>
                                 <div class="col-sm-10">
                                     <select name="category_id" id="" class="form-control" v-model="form.category_id">
-                                        <option value="1">fxcbvcxbxcvb</option>
-                                        <option value="2">fxcbvcxbxcvb</option>
-                                        <option value="3">fxcbvcxbxcvb</option>
-                                        <option value="4">fxcbvcxbxcvb</option>
+                                        <option value="">Select Category</option>
+                                        <option :value="category.id" v-for="category in categories">{{category.name}}</option>
+
                                     </select>
                                     <div v-if="form.errors.has('category_id')" class="text-danger" v-html="form.errors.get('category_id')" />
                                 </div>
@@ -91,7 +89,7 @@ export default {
    data:function (){
         return {
             form:new Form({
-                category_id:null,
+                category_id:'',
                  title:null,
                  content:null,
                  image:null,
@@ -105,6 +103,18 @@ export default {
             }
         }
    },
+
+    computed:{
+        categories(){
+            return this.$store.getters.categories;
+        }
+    },
+
+    mounted() {
+        this.$store.dispatch('getActivecategory')
+    },
+
+
  methods:{
         addPost:function () {
             let test=this
@@ -117,9 +127,9 @@ export default {
                /*console.log(response.data.post.title)*/
                 toastr.info(response.data.post.title +' Post Add successfully.')
               //test.$router.push('/categories')
-                test.form.category_id=null
+                test.form.category_id=''
                 test.form.title=null
-                test.form.content=null
+                test.form.content=''
                 test.form.image=null
                 test.form.status=null
 

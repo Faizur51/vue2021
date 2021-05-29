@@ -18,7 +18,7 @@ class CategorySeeder extends Seeder
         foreach (range(1,20) as $index){
             $name=$faker->name;
             Category::create([
-                'user_id'=>rand(1,21),
+                'user_id'=>rand(1,20),
                 'name'=>$name,
                 'slug'=>slugify($name),
                 'status'=>randomStatus(),

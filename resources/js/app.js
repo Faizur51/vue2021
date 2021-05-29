@@ -1,4 +1,3 @@
-
 require('./bootstrap');
 //vue
 window.Vue = require('vue').default;
@@ -11,7 +10,6 @@ window.Form=Form
 //sweet alert2
 import Swal from 'sweetalert2'
 window.Swal=Swal
-
 
 const Toast = Swal.mixin({
     toast: true,
@@ -30,9 +28,7 @@ window.Toast=Toast
 //toastr
 
 import toastr from 'toastr'
-
 window.toastr=toastr
-
 
 
 //vue router
@@ -50,10 +46,10 @@ const router =new VueRouter({
 
 //vuex
 import Vuex from 'vuex'
-
 Vue.use(Vuex)
 
 import storeData from "./store/store";
+
 const store = new Vuex.Store(
     storeData
 )

@@ -29,7 +29,16 @@ export default {
            }).catch(function (error){
 
            })
+       },
+       getActivecategory(data){
+           axios.get("get-active-category").then(function (response){
+               //console.log(response.data.category)
+               data.commit('ourcategories',response.data.category)
+           }).catch(function (error){
+
+           })
        }
+
    },
 
     mutations: {

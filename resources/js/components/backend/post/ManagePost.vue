@@ -47,7 +47,8 @@
 
                         <td>{{posts.slug}}</td>
                         <td>{{posts.content | subString(20)}}</td>
-                        <td><img :src="posts.image" alt="" style="width: 60px"></td>
+                    <!--<td><img :src="posts.image" alt="" style="width: 60px"></td>-->
+                        <td><img :src="filelink(posts.image)" alt="" style="width: 60px"></td>
                         <td>{{posts.user.name}}</td>
                         <td><span class="badge" :class="statusColor(posts.status)">{{statusName(posts.status)}}</span></td>
                         <td>
@@ -108,8 +109,8 @@ export default {
            }
            return data[status];
         },
-        removePost(id){
 
+        removePost(id){
             Swal.fire({
                 title: 'Are you sure?',
                 text: "You won't be able to revert this!",
@@ -126,7 +127,7 @@ export default {
                         'success'
                     )*/
                     axios.get('remove-post/'+id).then((response)=>{
-                     toastr.info(response.data.post.name +' Category delete successfully.')
+                     toastr.info(response.data.post.title +' Category delete successfully.')
                      this.$store.dispatch('getPost')
                      }).catch((response)=>{
 
@@ -138,6 +139,9 @@ export default {
         },
         emptydata(){
            return (this.post.length <1)
+        },
+        filelink:function (name){
+           return 'assets/images/posts/'+name;
         }
     }
 

@@ -15,7 +15,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts=Post::with('user','category')->select('id','user_id','category_id','title','slug','content','image','status')->get();
+        $posts=Post::with('user','category')->select('id','user_id','category_id','title','slug','content','image','status','created_at')->get();
         return response()->json([
             'post'=>$posts
         ]);
@@ -61,7 +61,10 @@ class PostController extends Controller
             'status'=>$request->status
         ]);
 
-        Image::make($request->image)->resize(300, 200)->save(public_path('assets/images/posts/'.$fileName));
+     if($posts){
+         Image::make($request->image)->resize(300, 200)->save(public_path('assets/images/posts/'.$fileName));
+
+     }
 
         return response()->json([
             'post'=>$posts
@@ -85,9 +88,13 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($slug)
     {
-        //
+        $post=Post::where('slug',$slug)->first();
+
+        return response()->json([
+            'post'=>$post
+        ]);
     }
 
     /**
@@ -97,9 +104,39 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $slug)
     {
-        //
+        $request->validate([
+            'title'=>'required|unique:posts,id,'.$request->id,
+            'content'=>'required',
+            'status'=>'required'
+        ]);
+
+        $posts=Post::where('slug',$slug)->first();
+
+            $posts->category_id=$request->category_id;
+            $posts->title=$request->title;
+            $posts->content=$request->content;
+            //$posts->image=$fileName;
+            $posts->slug=slugify($request->title);
+            $posts->status=$request->status;
+
+
+        if($request->image !== $posts->image)  {
+            $file=$request->image;
+            $fileNew=explode(';',$file);
+            $file_ex=explode('/',$fileNew[0]);
+            $file_ex= end($file_ex);
+            $fileName=slugify($request->title).'.'.$file_ex;
+            $posts->image=$fileName;
+            Image::make($request->image)->resize(300,200)->save(public_path('assets/images/posts/'.$fileName));
+        }
+
+            $posts->save();
+
+        return response()->json([
+            'post'=>$posts
+        ]);
     }
 
     /**
@@ -111,7 +148,13 @@ class PostController extends Controller
     public function destroy($id)
     {
         $posts=Post::find($id);
-        $posts->delete();
+        $fileName= $posts->image;
+        if( $posts->delete()){
+           if(file_exists(public_path('assets/images/posts/'.$fileName))) {
+               unlink(public_path('assets/images/posts/'.$fileName));
+           }
+        }
+
         return response()->json([
             'post'=>$posts
         ],200);

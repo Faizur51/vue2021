@@ -4,6 +4,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\PostController;
+use App\Http\Controllers\Frontend\MypostController;
+use App\Http\Controllers\Frontend\MycategoryController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,7 +19,7 @@ use App\Http\Controllers\Backend\PostController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('frontend.layout');
 });
 
 Auth::routes();
@@ -30,7 +33,7 @@ Route::get('/get-category', [CategoryController::class, 'index']);
 Route::get('/remove-category/{id}', [CategoryController::class, 'destroy']);
 Route::get('/edit-category/{slug}', [CategoryController::class, 'edit']);
 Route::post('/update-category/{slug}', [CategoryController::class, 'update']);
-
+Route::get('/get-active-category', [CategoryController::class, 'getActivecategory']);
 
 //post
 Route::post('/add-post', [PostController::class, 'store']);
@@ -38,3 +41,11 @@ Route::get('/get-post', [PostController::class, 'index']);
 Route::get('/remove-post/{id}', [PostController::class, 'destroy']);
 Route::get('/edit-post/{slug}', [PostController::class, 'edit']);
 Route::post('/update-post/{slug}', [PostController::class, 'update']);
+
+
+
+//frontsite
+Route::get('/get-frontsite-post', [MypostController::class, 'index']);
+Route::get('/show-single-post/{slug}', [MypostController::class, 'edit']);
+Route::get('/get-post-by-category/{slug}', [MypostController::class, 'getpostbycategory']);
+Route::get('/get-frontsite-active-category', [MycategoryController::class, 'getfrontsiteActivecategory']);

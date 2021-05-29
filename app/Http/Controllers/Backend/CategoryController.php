@@ -20,6 +20,16 @@ class CategoryController extends Controller
         ],200);
     }
 
+    public function getActivecategory()
+    {
+        $categories=Category::where('status',1)->get();
+        return response()->json([
+            'category'=>$categories
+        ],200);
+    }
+
+
+
     /**
      * Store a newly created resource in storage.
      *
@@ -92,6 +102,7 @@ class CategoryController extends Controller
     public function destroy($id)
     {
         $categories=Category::find($id);
+
         $categories->delete();
         return response()->json([
             'category'=>$categories
