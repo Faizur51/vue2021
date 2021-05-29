@@ -15,7 +15,7 @@ class PostSeeder extends Seeder
     public function run()
     {
         $faker=Factory::create();
-        foreach (range(1,20) as $index){
+        foreach (range(1,100) as $index){
             $name=$faker->name;
             Post::create([
                 'user_id'=>rand(1,20),

@@ -30,22 +30,6 @@
                 <div class="blog-wrapper-inner">
                   <router-view></router-view>
                 </div>
-                <div class="paginatoin-area text-center pt-40">
-                    <div class="row">
-                        <div class="col-12">
-                            <ul class="pagination-box">
-                                <li><a class="Previous" href="#">Previous</a>
-                                </li>
-                                <li class="active"><a href="#">1</a></li>
-                                <li><a href="#">2</a></li>
-                                <li><a href="#">3</a></li>
-                                <li>
-                                    <a class="Next" href="#"> Next </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
             </div>
             <div class="col-lg-3">
               <sidebar></sidebar>

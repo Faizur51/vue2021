@@ -35,10 +35,14 @@ const store = new Vuex.Store(
 //moment
 import {filter} from './filter/filter'
 
+//vue-pagination
+Vue.component('pagination', require('laravel-vue-pagination'));
 
+//component
 Vue.component('myheader', require('./components/frontend/MyHeader.vue').default);
 Vue.component('myfooter', require('./components/frontend/MyFooter.vue').default);
 Vue.component('sidebar',require('./components/frontend/SideBar').default);
+
 const app = new Vue({
     el: '#app',
     router,

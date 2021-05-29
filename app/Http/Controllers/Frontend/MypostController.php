@@ -9,12 +9,11 @@ use Illuminate\Http\Request;
 
 class MypostController extends Controller
 {
-    public function index()
+    public function allPost()
     {
-        $posts=Post::with('user','category')->select('id','user_id','category_id','title','slug','content','image','status','created_at')->get();
-        return response()->json([
-            'post'=>$posts
-        ]);
+        //$posts=Post::with('user','category')->get();
+        $posts=Post::with('user','category')->orderBy('id','desc')->paginate(12);
+        return response()->json($posts);
     }
 
     public function edit($slug)
