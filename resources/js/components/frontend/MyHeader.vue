@@ -52,7 +52,7 @@
                     <div class="col-lg-5 col-md-12 col-12 order-sm-last">
                         <div class="header-middle-inner">
                             <form>
-                                <input type="text" class="top-cat-field" v-model="search" placeholder="Search entire store here">
+                                <input type="text" class="top-cat-field"  placeholder="Search entire store here">
                                 <input type="submit" class="top-search-btn" value="Search">
                             </form>
                         </div>
@@ -160,26 +160,8 @@ export default {
     name: "MyHeader",
     data:function () {
         return{
-            search:''
+
         }
-    },
-
-    watch:{
-     search:function () {
-         //searchData function call korsi
-         //console.log(this.search)
-         this.searchData(this.search)
-     }
-    },
-
-    methods:{
-      searchData:function(val){
-         axios.get('search-post/'+val).then((response)=>{
-             console.log(response.data)
-         }).catch((error)=>{
-
-         })
-      }
     },
 
     computed:{

@@ -49,4 +49,4 @@ Route::get('/get-frontsite-post', [MypostController::class, 'allPost']);
 Route::get('/show-single-post/{slug}', [MypostController::class, 'edit']);
 Route::get('/get-post-by-category/{slug}', [MypostController::class, 'getpostbycategory']);
 Route::get('/get-frontsite-active-category', [MycategoryController::class, 'getfrontsiteActivecategory']);
-Route::get('/search-post/{val}', [MypostController::class, 'searchPost']);
+

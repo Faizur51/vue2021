@@ -2240,23 +2240,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "MyHeader",
   data: function data() {
-    return {
-      search: ''
-    };
-  },
-  watch: {
-    search: function search() {
-      //searchData function call korsi
-      //console.log(this.search)
-      this.searchData(this.search);
-    }
-  },
-  methods: {
-    searchData: function searchData(val) {
-      axios.get('search-post/' + val).then(function (response) {
-        console.log(response.data);
-      })["catch"](function (error) {});
-    }
+    return {};
   },
   computed: {
     categories: function categories() {
@@ -60896,55 +60880,7 @@ var render = function() {
   return _c("header", { staticClass: "header-pos" }, [
     _vm._m(0),
     _vm._v(" "),
-    _c("div", { staticClass: "header-middle" }, [
-      _c("div", { staticClass: "container-fluid" }, [
-        _c("div", { staticClass: "row align-items-center" }, [
-          _vm._m(1),
-          _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "col-lg-5 col-md-12 col-12 order-sm-last" },
-            [
-              _c("div", { staticClass: "header-middle-inner" }, [
-                _c("form", [
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.search,
-                        expression: "search"
-                      }
-                    ],
-                    staticClass: "top-cat-field",
-                    attrs: {
-                      type: "text",
-                      placeholder: "Search entire store here"
-                    },
-                    domProps: { value: _vm.search },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.search = $event.target.value
-                      }
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c("input", {
-                    staticClass: "top-search-btn",
-                    attrs: { type: "submit", value: "Search" }
-                  })
-                ])
-              ])
-            ]
-          ),
-          _vm._v(" "),
-          _vm._m(2)
-        ])
-      ])
-    ]),
+    _vm._m(1),
     _vm._v(" "),
     _c("div", { staticClass: "header-top-menu theme-bg sticker" }, [
       _c("div", { staticClass: "container-fluid" }, [
@@ -60967,7 +60903,7 @@ var render = function() {
                     )
                   ]),
                   _vm._v(" "),
-                  _vm._m(3)
+                  _vm._m(2)
                 ])
               ]),
               _vm._v(" "),
@@ -60975,7 +60911,7 @@ var render = function() {
                 _c("nav", { attrs: { id: "mobile-menu" } }, [
                   _c("ul", [
                     _c("li", [
-                      _vm._m(4),
+                      _vm._m(3),
                       _vm._v(" "),
                       _c(
                         "ul",
@@ -61001,16 +60937,16 @@ var render = function() {
                       )
                     ]),
                     _vm._v(" "),
-                    _vm._m(5)
+                    _vm._m(4)
                   ])
                 ])
               ]),
               _vm._v(" "),
-              _vm._m(6)
+              _vm._m(5)
             ])
           ]),
           _vm._v(" "),
-          _vm._m(7)
+          _vm._m(6)
         ])
       ])
     ])
@@ -61119,154 +61055,202 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-lg-3 col-md-4 col-sm-4 col-12" }, [
-      _c("div", { staticClass: "logo" }, [
-        _c("a", { attrs: { href: "index.html" } }, [
-          _c("img", {
-            attrs: {
-              src: "assets/img/logo/logo-sinrato.png",
-              alt: "brand-logo"
-            }
-          })
+    return _c("div", { staticClass: "header-middle" }, [
+      _c("div", { staticClass: "container-fluid" }, [
+        _c("div", { staticClass: "row align-items-center" }, [
+          _c("div", { staticClass: "col-lg-3 col-md-4 col-sm-4 col-12" }, [
+            _c("div", { staticClass: "logo" }, [
+              _c("a", { attrs: { href: "index.html" } }, [
+                _c("img", {
+                  attrs: {
+                    src: "assets/img/logo/logo-sinrato.png",
+                    alt: "brand-logo"
+                  }
+                })
+              ])
+            ])
+          ]),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "col-lg-5 col-md-12 col-12 order-sm-last" },
+            [
+              _c("div", { staticClass: "header-middle-inner" }, [
+                _c("form", [
+                  _c("input", {
+                    staticClass: "top-cat-field",
+                    attrs: {
+                      type: "text",
+                      placeholder: "Search entire store here"
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("input", {
+                    staticClass: "top-search-btn",
+                    attrs: { type: "submit", value: "Search" }
+                  })
+                ])
+              ])
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "col-lg-4 col-md-8 col-12 col-sm-8 order-lg-last" },
+            [
+              _c("div", { staticClass: "mini-cart-option" }, [
+                _c("ul", [
+                  _c("li", { staticClass: "compare" }, [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "ha-toggle",
+                        attrs: { href: "compare.html" }
+                      },
+                      [
+                        _c("span", { staticClass: "lnr lnr-sync" }),
+                        _vm._v("Product compare")
+                      ]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("li", { staticClass: "wishlist" }, [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "ha-toggle",
+                        attrs: { href: "wishlist.html" }
+                      },
+                      [
+                        _c("span", { staticClass: "lnr lnr-heart" }),
+                        _c("span", { staticClass: "count" }, [_vm._v("1")]),
+                        _vm._v("wishlist")
+                      ]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("li", { staticClass: "my-cart" }, [
+                    _c(
+                      "a",
+                      { staticClass: "ha-toggle", attrs: { href: "#" } },
+                      [
+                        _c("span", { staticClass: "lnr lnr-cart" }),
+                        _c("span", { staticClass: "count" }, [_vm._v("2")]),
+                        _vm._v("my cart")
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "ul",
+                      { staticClass: "mini-cart-drop-down ha-dropdown" },
+                      [
+                        _c("li", { staticClass: "mb-30" }, [
+                          _c("div", { staticClass: "cart-img" }, [
+                            _c(
+                              "a",
+                              { attrs: { href: "product-details.html" } },
+                              [
+                                _c("img", {
+                                  attrs: {
+                                    alt: "",
+                                    src: "assets/img/cart/cart-1.jpg"
+                                  }
+                                })
+                              ]
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "cart-info" }, [
+                            _c("h4", [
+                              _c(
+                                "a",
+                                { attrs: { href: "product-details.html" } },
+                                [_vm._v("Koss Porta Pro On Ear  Headphones ")]
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("span", [
+                              _c("span", [_vm._v("1 x ")]),
+                              _vm._v("£165.00")
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "del-icon" }, [
+                            _c("i", { staticClass: "fa fa-times-circle" })
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("li", [
+                          _c("div", { staticClass: "subtotal-text" }, [
+                            _vm._v("Sub-total: ")
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "subtotal-price" }, [
+                            _vm._v("£48.94")
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("li", [
+                          _c("div", { staticClass: "subtotal-text" }, [
+                            _vm._v("Eco Tax (-2.00): ")
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "subtotal-price" }, [
+                            _vm._v("£1.51")
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("li", [
+                          _c("div", { staticClass: "subtotal-text" }, [
+                            _vm._v("Vat (20%): ")
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "subtotal-price" }, [
+                            _vm._v("£9.79")
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("li", [
+                          _c("div", { staticClass: "subtotal-text" }, [
+                            _vm._v("Total: ")
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "subtotal-price" }, [
+                            _c("span", [_vm._v("£60.24")])
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("li", { staticClass: "mt-30" }, [
+                          _c(
+                            "a",
+                            {
+                              staticClass: "cart-button",
+                              attrs: { href: "cart.html" }
+                            },
+                            [_vm._v("view cart")]
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("li", [
+                          _c(
+                            "a",
+                            {
+                              staticClass: "cart-button",
+                              attrs: { href: "checkout.html" }
+                            },
+                            [_vm._v("checkout")]
+                          )
+                        ])
+                      ]
+                    )
+                  ])
+                ])
+              ])
+            ]
+          )
         ])
       ])
     ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      { staticClass: "col-lg-4 col-md-8 col-12 col-sm-8 order-lg-last" },
-      [
-        _c("div", { staticClass: "mini-cart-option" }, [
-          _c("ul", [
-            _c("li", { staticClass: "compare" }, [
-              _c(
-                "a",
-                { staticClass: "ha-toggle", attrs: { href: "compare.html" } },
-                [
-                  _c("span", { staticClass: "lnr lnr-sync" }),
-                  _vm._v("Product compare")
-                ]
-              )
-            ]),
-            _vm._v(" "),
-            _c("li", { staticClass: "wishlist" }, [
-              _c(
-                "a",
-                { staticClass: "ha-toggle", attrs: { href: "wishlist.html" } },
-                [
-                  _c("span", { staticClass: "lnr lnr-heart" }),
-                  _c("span", { staticClass: "count" }, [_vm._v("1")]),
-                  _vm._v("wishlist")
-                ]
-              )
-            ]),
-            _vm._v(" "),
-            _c("li", { staticClass: "my-cart" }, [
-              _c("a", { staticClass: "ha-toggle", attrs: { href: "#" } }, [
-                _c("span", { staticClass: "lnr lnr-cart" }),
-                _c("span", { staticClass: "count" }, [_vm._v("2")]),
-                _vm._v("my cart")
-              ]),
-              _vm._v(" "),
-              _c("ul", { staticClass: "mini-cart-drop-down ha-dropdown" }, [
-                _c("li", { staticClass: "mb-30" }, [
-                  _c("div", { staticClass: "cart-img" }, [
-                    _c("a", { attrs: { href: "product-details.html" } }, [
-                      _c("img", {
-                        attrs: { alt: "", src: "assets/img/cart/cart-1.jpg" }
-                      })
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "cart-info" }, [
-                    _c("h4", [
-                      _c("a", { attrs: { href: "product-details.html" } }, [
-                        _vm._v("Koss Porta Pro On Ear  Headphones ")
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("span", [
-                      _c("span", [_vm._v("1 x ")]),
-                      _vm._v("£165.00")
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "del-icon" }, [
-                    _c("i", { staticClass: "fa fa-times-circle" })
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("li", [
-                  _c("div", { staticClass: "subtotal-text" }, [
-                    _vm._v("Sub-total: ")
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "subtotal-price" }, [
-                    _vm._v("£48.94")
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("li", [
-                  _c("div", { staticClass: "subtotal-text" }, [
-                    _vm._v("Eco Tax (-2.00): ")
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "subtotal-price" }, [
-                    _vm._v("£1.51")
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("li", [
-                  _c("div", { staticClass: "subtotal-text" }, [
-                    _vm._v("Vat (20%): ")
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "subtotal-price" }, [
-                    _vm._v("£9.79")
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("li", [
-                  _c("div", { staticClass: "subtotal-text" }, [
-                    _vm._v("Total: ")
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "subtotal-price" }, [
-                    _c("span", [_vm._v("£60.24")])
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("li", { staticClass: "mt-30" }, [
-                  _c(
-                    "a",
-                    {
-                      staticClass: "cart-button",
-                      attrs: { href: "cart.html" }
-                    },
-                    [_vm._v("view cart")]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("li", [
-                  _c(
-                    "a",
-                    {
-                      staticClass: "cart-button",
-                      attrs: { href: "checkout.html" }
-                    },
-                    [_vm._v("checkout")]
-                  )
-                ])
-              ])
-            ])
-          ])
-        ])
-      ]
-    )
   },
   function() {
     var _vm = this
