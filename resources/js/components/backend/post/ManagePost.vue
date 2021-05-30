@@ -12,7 +12,7 @@
                     <tr>
                         <th>
                             <div class="checkbox icheck-alizarin">
-                                <input type="checkbox"  id="alizarin1" />
+                                <input :disabled="emptydata()" type="checkbox"  @click='selectAll' v-model="selectedAll" id="alizarin1" />
                                 <label for="alizarin1"></label>
                             </div>
                         </th>
@@ -30,15 +30,17 @@
                     <tbody>
                     <tr v-for="(posts,index) in post">
                         <td>
-<!--                            <div class="custom-control custom-checkbox">
-                                <input class="custom-control-input custom-control-input-danger custom-control-input-outline" type="checkbox" id="customCheckbox1">
+<!--                           <div class="custom-control custom-checkbox">
+                                <input class="custom-control-input custom-control-input-danger custom-control-input-outline" :value="posts.id" v-model="selected" type="checkbox" id="customCheckbox1">
                                 <label for="customCheckbox1" class="custom-control-label"></label>
                             </div>-->
 
-                            <div class="checkbox icheck-alizarin">
-                                <input type="checkbox"  id="alizarin" />
+<!--                           <div class="checkbox icheck-alizarin">
+                                <input type="checkbox" :value="posts.id" v-model="selected" id="alizarin" />
                                 <label for="alizarin"></label>
-                            </div>
+                            </div>-->
+
+                            <input type="checkbox" :value="posts.id" v-model="selected">
 
                         </td>
                         <td>{{++index}}</td>
@@ -84,15 +86,27 @@
 <script>
 export default {
     name: "ManageComponent",
+    data:function (){
+        return{
+            selectedAll:false,
+            selected:[]
+        }
+    },
 
     computed:{
         post(){
             return this.$store.getters.posts;
         }
     },
-
     mounted() {
         this.$store.dispatch('getPost')
+    },
+
+
+    watch:{
+        selected:function(){
+
+        }
     },
     methods:{
        statusName(status){
@@ -142,6 +156,18 @@ export default {
         },
         filelink:function (name){
            return 'assets/images/posts/'+name;
+        },
+
+
+        selectAll:function (){
+            //console.log(event.target.checked)
+            if(event.target.checked == false){
+                this.selected=[]
+            }else{
+             this.post.forEach((post)=>{
+                 this.selected.push(post.id)
+             })
+            }
         }
     }
 

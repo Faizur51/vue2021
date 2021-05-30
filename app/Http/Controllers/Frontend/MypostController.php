@@ -37,4 +37,10 @@ class MypostController extends Controller
         ]);
     }
 
+    public function searchPost($search){
+        $posts=Post::where('title','like',"%".$search."%")->where('content','like',"%".$search."%")->get();
+        return $posts;
+    }
+
+
 }

@@ -2695,8 +2695,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "ManageComponent",
+  data: function data() {
+    return {
+      selectedAll: false,
+      selected: []
+    };
+  },
   computed: {
     post: function post() {
       return this.$store.getters.posts;
@@ -2704,6 +2712,9 @@ __webpack_require__.r(__webpack_exports__);
   },
   mounted: function mounted() {
     this.$store.dispatch('getPost');
+  },
+  watch: {
+    selected: function selected() {}
   },
   methods: {
     statusName: function statusName(status) {
@@ -2751,6 +2762,18 @@ __webpack_require__.r(__webpack_exports__);
     },
     filelink: function filelink(name) {
       return 'assets/images/posts/' + name;
+    },
+    selectAll: function selectAll() {
+      var _this2 = this;
+
+      //console.log(event.target.checked)
+      if (event.target.checked == false) {
+        this.selected = [];
+      } else {
+        this.post.forEach(function (post) {
+          _this2.selected.push(post.id);
+        });
+      }
     }
   }
 });
@@ -65654,14 +65677,122 @@ var render = function() {
       _vm._v(" "),
       _c("div", { staticClass: "card-body" }, [
         _c("table", { staticClass: "table table-bordered" }, [
-          _vm._m(0),
+          _c("thead", [
+            _c("tr", [
+              _c("th", [
+                _c("div", { staticClass: "checkbox icheck-alizarin" }, [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.selectedAll,
+                        expression: "selectedAll"
+                      }
+                    ],
+                    attrs: {
+                      disabled: _vm.emptydata(),
+                      type: "checkbox",
+                      id: "alizarin1"
+                    },
+                    domProps: {
+                      checked: Array.isArray(_vm.selectedAll)
+                        ? _vm._i(_vm.selectedAll, null) > -1
+                        : _vm.selectedAll
+                    },
+                    on: {
+                      click: _vm.selectAll,
+                      change: function($event) {
+                        var $$a = _vm.selectedAll,
+                          $$el = $event.target,
+                          $$c = $$el.checked ? true : false
+                        if (Array.isArray($$a)) {
+                          var $$v = null,
+                            $$i = _vm._i($$a, $$v)
+                          if ($$el.checked) {
+                            $$i < 0 && (_vm.selectedAll = $$a.concat([$$v]))
+                          } else {
+                            $$i > -1 &&
+                              (_vm.selectedAll = $$a
+                                .slice(0, $$i)
+                                .concat($$a.slice($$i + 1)))
+                          }
+                        } else {
+                          _vm.selectedAll = $$c
+                        }
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("label", { attrs: { for: "alizarin1" } })
+                ])
+              ]),
+              _vm._v(" "),
+              _c("th", { staticStyle: { width: "100px" } }, [_vm._v("Sl")]),
+              _vm._v(" "),
+              _c("th", [_vm._v("Category Name")]),
+              _vm._v(" "),
+              _c("th", [_vm._v("Title")]),
+              _vm._v(" "),
+              _c("th", [_vm._v("Slug")]),
+              _vm._v(" "),
+              _c("th", [_vm._v("Content")]),
+              _vm._v(" "),
+              _c("th", [_vm._v("Thumbnail")]),
+              _vm._v(" "),
+              _c("th", [_vm._v("user")]),
+              _vm._v(" "),
+              _c("th", [_vm._v("Status")]),
+              _vm._v(" "),
+              _c("th", { staticStyle: { width: "150px" } }, [_vm._v("Action")])
+            ])
+          ]),
           _vm._v(" "),
           _c(
             "tbody",
             [
               _vm._l(_vm.post, function(posts, index) {
                 return _c("tr", [
-                  _vm._m(1, true),
+                  _c("td", [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.selected,
+                          expression: "selected"
+                        }
+                      ],
+                      attrs: { type: "checkbox" },
+                      domProps: {
+                        value: posts.id,
+                        checked: Array.isArray(_vm.selected)
+                          ? _vm._i(_vm.selected, posts.id) > -1
+                          : _vm.selected
+                      },
+                      on: {
+                        change: function($event) {
+                          var $$a = _vm.selected,
+                            $$el = $event.target,
+                            $$c = $$el.checked ? true : false
+                          if (Array.isArray($$a)) {
+                            var $$v = posts.id,
+                              $$i = _vm._i($$a, $$v)
+                            if ($$el.checked) {
+                              $$i < 0 && (_vm.selected = $$a.concat([$$v]))
+                            } else {
+                              $$i > -1 &&
+                                (_vm.selected = $$a
+                                  .slice(0, $$i)
+                                  .concat($$a.slice($$i + 1)))
+                            }
+                          } else {
+                            _vm.selected = $$c
+                          }
+                        }
+                      }
+                    })
+                  ]),
                   _vm._v(" "),
                   _c("td", [_vm._v(_vm._s(++index))]),
                   _vm._v(" "),
@@ -65727,64 +65858,18 @@ var render = function() {
                 ])
               }),
               _vm._v(" "),
-              _vm.emptydata() ? _c("tr", [_vm._m(2)]) : _vm._e()
+              _vm.emptydata() ? _c("tr", [_vm._m(0)]) : _vm._e()
             ],
             2
           )
         ])
       ]),
       _vm._v(" "),
-      _vm._m(3)
+      _vm._m(1)
     ])
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("thead", [
-      _c("tr", [
-        _c("th", [
-          _c("div", { staticClass: "checkbox icheck-alizarin" }, [
-            _c("input", { attrs: { type: "checkbox", id: "alizarin1" } }),
-            _vm._v(" "),
-            _c("label", { attrs: { for: "alizarin1" } })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("th", { staticStyle: { width: "100px" } }, [_vm._v("Sl")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Category Name")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Title")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Slug")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Content")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Thumbnail")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("user")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Status")]),
-        _vm._v(" "),
-        _c("th", { staticStyle: { width: "150px" } }, [_vm._v("Action")])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("td", [
-      _c("div", { staticClass: "checkbox icheck-alizarin" }, [
-        _c("input", { attrs: { type: "checkbox", id: "alizarin" } }),
-        _vm._v(" "),
-        _c("label", { attrs: { for: "alizarin" } })
-      ])
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
