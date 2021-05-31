@@ -104,10 +104,11 @@ export default {
 
 
     watch:{
-        selected:function(){
-
+        selected:function(selected){
+                this.selectedAll=selected.length==this.post.length
         }
     },
+
     methods:{
        statusName(status){
            let data={

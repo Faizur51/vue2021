@@ -2714,7 +2714,9 @@ __webpack_require__.r(__webpack_exports__);
     this.$store.dispatch('getPost');
   },
   watch: {
-    selected: function selected() {}
+    selected: function selected(_selected) {
+      this.selectedAll = _selected.length == this.post.length;
+    }
   },
   methods: {
     statusName: function statusName(status) {

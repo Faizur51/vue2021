@@ -36,6 +36,6 @@ class MypostController extends Controller
             'post'=>$post
         ]);
     }
-    
+
 
 }
